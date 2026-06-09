@@ -330,7 +330,7 @@ const Transections = () => {
                                 </div>
 
                                 <div className="flex justify-between mt-4 text-xs text-gray-500 dark:text-gray-400">
-                                    <span>📅 {t.date}</span>
+                                    <span>📅{new Date(t.date).toLocaleDateString("en-GB")}</span>
 
                                     <div className="flex gap-3">
 
