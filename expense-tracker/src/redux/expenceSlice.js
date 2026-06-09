@@ -32,6 +32,7 @@ export const fetchMonthlyTransactions =
     createAsyncThunk(
         "transactions/fetchMonthlyTransactions",
         async (_,{ getState }) => {
+            console.log("backend url:",BACKEND_URL)
             const token = getState().auth.accessToken;
             const response = await axios.get(
                 `${BACKEND_URL}/api/analytics/monthly`,

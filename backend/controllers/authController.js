@@ -48,8 +48,8 @@ export async function register(req, res) {
     res.cookie("refreshToken", refreshToken,
         {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax",
+            secure: true,
+            sameSite: "none",
             maxAge: 7 * 24 * 60 * 60 * 1000
         });
     res.status(201).json({
@@ -100,8 +100,8 @@ export async function login(req, res) {
     res.cookie("refreshToken", refreshToken,
         {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax",
+            secure: true,
+            sameSite: "none",
             maxAge: 7 * 24 * 60 * 60 * 1000
         });
     res.status(201).json({
@@ -166,8 +166,8 @@ export async function refreshToken(req, res) {
         newRefreshToken,
         {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax",
+            secure: true,
+            sameSite: "none",
             maxAge: 7 * 24 * 60 * 60 * 1000
         }
     );
