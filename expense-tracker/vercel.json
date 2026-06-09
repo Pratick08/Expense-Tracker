@@ -1,6 +1,5 @@
 {
     "version":2,
-    "name":"backed",
     "builds":[
         {
             "src":"package.json",
