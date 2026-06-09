@@ -9,7 +9,7 @@ const cookieParser=require('cookie-parser')
 
 // ✅ CORS FIX
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: ["http://localhost:5173","https://expense-tracker-frontend-pi-roan.vercel.app"],
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   credentials: true
 }));
