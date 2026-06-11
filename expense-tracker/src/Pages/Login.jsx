@@ -94,12 +94,12 @@ const Login = () => {
                                 Password
                             </label>
 
-                            <button
+                            {/* <button
                                 type="button"
                                 className="text-sm text-cyan-400 hover:text-cyan-300 transition-all duration-300"
                             >
                                 Forgot Password?
-                            </button>
+                            </button> */}
                         </div>
 
                         <input
@@ -124,7 +124,7 @@ const Login = () => {
                     </div>
 
                     {/* Remember Me */}
-                    <div className="flex items-center justify-between text-sm">
+                    {/* <div className="flex items-center justify-between text-sm">
                         <label className="flex items-center gap-3 text-gray-400 cursor-pointer">
                             <input
                                 type="checkbox"
@@ -134,7 +134,7 @@ const Login = () => {
 
                             Remember me
                         </label>
-                    </div>
+                    </div> */}
 
 
                     {error && (

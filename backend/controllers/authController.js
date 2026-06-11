@@ -174,7 +174,7 @@ export async function refreshToken(req, res) {
 
     res.status(200).json({
         message: "Access token generated successfully",
-        user: { username: user.username, email: user.email },
+        user: { username: user.username, email: user.email, avatar: user.avatar, createdAt: user.createdAt },
         accessToken
     });
 
@@ -206,6 +206,112 @@ export async function logout(req, res) {
     res.status(200).json({
         message: "Logged out successfully"
     });
+}
+
+export async function updateProfile(req, res) {
+    try {
+        const updatedUser = await UserModel.findByIdAndUpdate(
+            {
+                _id: req.user.id
+            },
+            req.body,
+            { new: true }
+        )
+
+        res.status(201).json({
+            success: true,
+            updatedUser,
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+}
+export async function updateAvatar(req, res) {
+    try {
+        const user = await UserModel.findByIdAndUpdate(
+            {
+                _id: req.user.id
+            },
+            { avatar: req.body.avatar },
+            { new: true }
+        )
+
+        res.status(201).json({
+            success: true,
+            user,
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+}
+
+export async function updatePass(req, res) {
+    try {
+        const user = await UserModel.findById({
+            _id: req.user.id,
+        })
+        console.log(req.body)
+        if (!user) {
+            return res.status(401).json({
+                message: "User Not Found"
+            })
+        }
+        const isPassValid = await bcrypt.compare(req.body.currentPass, user.password);
+        if (!isPassValid) {
+            return res.status(401).json({
+                message: "Current Password Is Incorrect"
+            })
+        }
+        const hashPass = await bcrypt.hash(req.body.confirmPass,12);
+        user.password = hashPass;
+        await user.save();
+        res.status(201).json({
+            message: "Password Changed Successfully",
+            user
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+}
+
+ export async function deleteAccount(req, res) {
+    try {
+        const user = await UserModel.findByIdAndDelete({
+            _id: req.user.id
+        })
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+
+        res.clearCookie("refreshToken");
+
+        return res.status(200).json({
+            success: true,
+            message: "Account deleted successfully"
+        });
+
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
 }
 
 

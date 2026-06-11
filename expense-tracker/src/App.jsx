@@ -15,6 +15,7 @@ import ProtectedRoute from "./components/ProtectedRouter";
 import Login from './Pages/Login.jsx'
 import Signup from './Pages/Signup.jsx'
 import { refreshAccessToken } from './redux/authSlice.js'
+import Profile from './Pages/Profile.jsx'
 
 const router = createBrowserRouter([
 
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "budget",
         element: <Budgets />
+      },
+      {
+        path:"profile",
+        element:<Profile/>
       }
     ]
   }

@@ -7,4 +7,4 @@ router.post('/budgets',protect,addBudget);
 router.delete('/budgets/:id',protect,deleteBudget);
 // router.delete('/transactions/:id',deleteTransactions);
 // router.put('/transactions/:id',updateTransactions);
-module.exports = router;    
+module.exports = router;      

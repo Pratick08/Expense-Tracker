@@ -3,21 +3,32 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logout } from "../redux/authSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import defaultAvatar from '../assets/avatar/default.jpg'
+import avatar1 from '../assets/avatar/AvatarMaker1.png'
+import avatar2 from '../assets/avatar/AvatarMaker2.png'
+import avatar3 from '../assets/avatar/AvatarMaker3.png'
+import avatar4 from '../assets/avatar/AvatarMaker4.png'
+import avatar5 from '../assets/avatar/AvatarMaker5.png'
+import avatar6 from '../assets/avatar/AvatarMaker6.png'
+// import { useState } from "react";
 const Sidebar = () => {
     const user = useSelector((state) => state.auth.user);
-    const letter = user.username.slice(" ")[0].toUpperCase()
+    // const [selectAvatar,setSelectAvatar]=useState("");
+    // const letter = user.username.slice(" ")[0]
     const dispatch = useDispatch();
     const navigate = useNavigate()
     function handleLogout() {
         dispatch(logout())
         navigate('/login')
     }
+    const avatarmap = [defaultAvatar, avatar1, avatar2, avatar3, avatar4, avatar5, avatar6]
+    const selectAvatar = avatarmap[user.avatar];
+    console.log("userAvatar", user.avatar)
     return (
         <aside className="w-65 h-screen sticky top-0 bg-white dark:bg-[#020617]/95 border-r border-blue-200 dark:border-gray-800 flex flex-col justify-between px-5 py-6">
 
             {/* Top Section */}
             <div>
-
                 {/* Logo */}
                 <div className="flex items-center gap-3 mb-12">
 
@@ -92,6 +103,19 @@ const Sidebar = () => {
                         <span>Budgets</span>
                     </NavLink>
 
+                    <NavLink
+                        to="/profile"
+                        className={({ isActive }) =>
+                            `flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 font-medium ${isActive
+                                ? "bg-cyan-500 text-white shadow-md"
+                                : "text-black dark:text-white hover:bg-blue-100 dark:hover:bg-[#1e293b]"
+                            }`
+                        }
+                    >
+                        <span className="text-lg">👤</span>
+                        <span>Profile</span>
+                    </NavLink>
+
                 </nav>
 
             </div>
@@ -105,8 +129,12 @@ const Sidebar = () => {
                 >
 
                     {/* Avatar */}
-                    <div className="w-11 h-11 rounded-full bg-cyan-500 flex items-center justify-center text-black font-bold shrink-0">
-                        {letter}
+                    <div className="w-11 h-11 rounded-full bg-cyan-500 flex items-center justify-center overflow-hidden shrink-0">
+                        <img
+                            src={selectAvatar}
+                            alt="Profile Avatar"
+                            className="w-full h-full object-cover"
+                        />
                     </div>
 
                     {/* User Info */}
