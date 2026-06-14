@@ -195,7 +195,7 @@ const HomePage = () => {
 
                                 <div
                                     key={index}
-                                    className="group bg-white border border-white/10 rounded-[32px] p-8 backdrop-blur-xl hover:-translate-y-3 hover:border-cyan-500/40 transition-all duration-500 shadow-xl"
+                                    className="group bg-white dark:bg-white/5 border border-white/10 rounded-[32px] p-8 backdrop-blur-xl hover:-translate-y-3 hover:border-cyan-500/40 transition-all duration-500 shadow-xl"
                                 >
 
                                     <div className="w-[72px] h-[72px] rounded-3xl bg-linear-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-4xl mb-7 shadow-xl shadow-cyan-500/20 group-hover:scale-110 transition-all duration-300">
