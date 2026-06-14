@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { updateProfile, updateAvatar, updatePassword, deleteAccount } from "../redux/authSlice";
 import defaultAvatar from '../assets/avatar/default.jpg'
 import avatar1 from '../assets/avatar/AvatarMaker1.png'
@@ -15,8 +15,9 @@ import toast from "react-hot-toast";
 
 const Profile = () => {
     const user = useSelector((state) => state.auth.user)
+    console.log(user.avatar)
     const dispatch = useDispatch()
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const [usernameError, setUsernameError] = useState("");
     const [emailError, setEmailError] = useState("");
     const [newPassError, setNewPassError] = useState("");
@@ -27,6 +28,8 @@ const Profile = () => {
     const [confirmPass, setConfirmPass] = useState("")
     const [selectAvatar, setSelectAvatar] = useState(user.avatar)
     const avatars = [defaultAvatar, avatar1, avatar2, avatar3, avatar4, avatar5, avatar6]
+
+    // CHANGE USER NAME AND EMAIL
     function handleSaveChanges() {
         const userDetails = {
             username,
@@ -66,6 +69,7 @@ const Profile = () => {
         setConfirmPass("")
     }
 
+    //DELETE ACCOUNT
     function handleDeleteAccount() {
         const confirmed = window.confirm(
             "Are you sure you want to delete your account? This action cannot be undone."

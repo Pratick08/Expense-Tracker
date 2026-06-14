@@ -53,20 +53,9 @@ const HomePage = () => {
 
     return (
 
-        <div className="min-h-screen bg-gray-50 text-gray-900 dark:bg-[#020617] dark:text-white overflow-hidden relative">
-
-            {/* BACKGROUND */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-
-                <div className="absolute -top-32 -left-32 w-105 h-105 bg-cyan-500/10 dark:bg-cyan-500/20 blur-3xl rounded-full" />
-
-                <div className="absolute -bottom-32 -right-32 w-105 h-105 bg-blue-500/10 dark:bg-blue-500/20 blur-3xl rounded-full" />
-
-                <div className="absolute top-[40%] left-[40%] w-62.5 h-62.5 bg-purple-500/5 dark:bg-purple-500/10 blur-3xl rounded-full" />
-
-            </div>
+       <div className="min-h-screen bg-gray-100 text-gray-900 dark:bg-[#020617] dark:text-white relative">
             {/* NAVBAR */}
-            <nav className="relative z-10 flex items-center justify-between px-6 md:px-12 py-6 border-b border-gray-200 dark:border-white/10 backdrop-blur-xl bg-white/70 dark:bg-transparent">
+            <nav className="w-full h-20 sticky top-0 z-50 bg-white shadow-lg dark:bg-[#020617]/95 backdrop-blur-xl dark:border-b  dark:border-gray-800 px-4 sm:px-6 flex items-center justify-between transition-colors duration-300">
 
                 <div className="flex items-center gap-4">
 
@@ -98,7 +87,7 @@ const HomePage = () => {
                         </button>
                     </NavLink>
 
-                    <button className="px-6 py-2.5 rounded-2xl bg-linear-to-r from-cyan-400 to-blue-500 text-black font-bold hover:scale-105 transition-all duration-300 shadow-xl shadow-cyan-500/30">
+                    <button className="px-6 py-2.5 rounded-2xl bg-linear-to-r from-cyan-400 to-blue-500 text-black font-bold hover:scale-105 transition-all duration-300 ">
                         <NavLink to="/dashboard">Get Started</NavLink>
                     </button>
 
@@ -206,7 +195,7 @@ const HomePage = () => {
 
                                 <div
                                     key={index}
-                                    className="group bg-white/5 border border-white/10 rounded-[32px] p-8 backdrop-blur-xl hover:-translate-y-3 hover:border-cyan-500/40 transition-all duration-500 shadow-xl"
+                                    className="group bg-white border border-white/10 rounded-[32px] p-8 backdrop-blur-xl hover:-translate-y-3 hover:border-cyan-500/40 transition-all duration-500 shadow-xl"
                                 >
 
                                     <div className="w-[72px] h-[72px] rounded-3xl bg-linear-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-4xl mb-7 shadow-xl shadow-cyan-500/20 group-hover:scale-110 transition-all duration-300">
