@@ -6,7 +6,9 @@ import { useNavigate } from "react-router";
 import toast from 'react-hot-toast';
 import AuthNavbar from "../components/AuthNavbar";
 import authBg from '../assets/auth-background.png'
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -18,7 +20,7 @@ const Login = () => {
     } = useForm();
 
     const { error } = useSelector((state) => state.auth);
-
+    const [isPassword, setIsPassword] =useState(true)
     const onSubmit = async (data) => {
         try {
             await dispatch(authLogin(data));
@@ -89,13 +91,13 @@ const Login = () => {
                                     <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
                                         Password
                                     </label>
-                                    <NavLink to="/forgot-password" className="text-xs font-semibold text-cyan-600 dark:text-cyan-400 hover:underline">
+                                    {/* <NavLink to="/forgot-password" className="text-xs font-semibold text-cyan-600 dark:text-cyan-400 hover:underline">
                                         Forgot password?
-                                    </NavLink>
+                                    </NavLink> */}
                                 </div>
                                 <div className="relative">
                                     <input
-                                        type="password"
+                                        type={isPassword ? "password" : "text"}
                                         placeholder="••••••••"
                                         className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-3.5 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-500/10 dark:focus:ring-cyan-500/5 transition-all duration-200 shadow-sm"
                                         {...register("password", {
@@ -105,6 +107,11 @@ const Login = () => {
                                                 message: "Password must be at least 6 characters",
                                             },
                                         })}
+                                    />
+                                    <FontAwesomeIcon
+                                        icon={isPassword ? faEye : faEyeSlash}
+                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 cursor-pointer hover:text-cyan-500 transition-colors"
+                                        onClick={() => setIsPassword(!isPassword)}
                                     />
                                 </div>
                                 {errors.password && (

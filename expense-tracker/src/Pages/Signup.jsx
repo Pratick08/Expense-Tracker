@@ -2,8 +2,11 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from 'react-redux';
 import { authregister } from "../redux/authSlice";
 import { NavLink, useNavigate } from "react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import AuthNavbar from "../components/AuthNavbar";
 import authBg from '../assets/auth-background.png'
+import { useState } from "react";
 const Signup = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -14,7 +17,7 @@ const Signup = () => {
     } = useForm();
 
     const { error } = useSelector((state) => state.auth);
-
+    const [isPassword,setIsPassword]=useState(true)
     const onSubmit = async (data) => {
         const userData = data;
         const result = await dispatch(authregister(userData));
@@ -113,7 +116,7 @@ const Signup = () => {
                                 </label>
                                 <div className="relative">
                                     <input
-                                        type="password"
+                                       type={isPassword ? "password" : "text"}
                                         placeholder="••••••••"
                                         className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-3.5 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 outline-none focus:border-cyan-500 focus:ring-4 focus:ring-cyan-500/10 dark:focus:ring-cyan-500/5 transition-all duration-200 shadow-sm"
                                         {...register("password", {
@@ -124,6 +127,12 @@ const Signup = () => {
                                             },
                                         })}
                                     />
+                                    <FontAwesomeIcon
+                                         icon={isPassword ?faEye: faEyeSlash }
+                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 cursor-pointer hover:text-cyan-500 transition-colors"
+                                        onClick={()=>setIsPassword(!isPassword)}
+                                    />
+                                   
                                 </div>
                                 {errors.password && (
                                     <p className="text-rose-500 dark:text-rose-400 text-xs font-medium flex items-center gap-1 mt-1">

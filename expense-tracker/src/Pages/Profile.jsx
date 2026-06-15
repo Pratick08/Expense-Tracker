@@ -4,13 +4,13 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from 'react-router-dom'
 import { updateProfile, updateAvatar, updatePassword, deleteAccount } from "../redux/authSlice";
-import defaultAvatar from '../assets/avatar/default.jpg'
+import defaultAvatar from '../assets/avatar/userdefaultimg.png'
 import avatar1 from '../assets/avatar/AvatarMaker1.png'
-import avatar2 from '../assets/avatar/AvatarMaker2.png'
-import avatar3 from '../assets/avatar/AvatarMaker3.png'
-import avatar4 from '../assets/avatar/AvatarMaker4.png'
-import avatar5 from '../assets/avatar/AvatarMaker5.png'
-import avatar6 from '../assets/avatar/AvatarMaker6.png'
+import avatar2 from '../assets/avatar/AvatarMakerBg2.png'
+import avatar3 from '../assets/avatar/AvatarMakerBg3.png'
+import avatar4 from '../assets/avatar/AvatarMakerBg4.png'
+import avatar5 from '../assets/avatar/AvatarMakerBg5.png'
+import avatar6 from '../assets/avatar/AvatarMakerBg6.png'
 import toast from "react-hot-toast";
 
 const Profile = () => {
@@ -162,7 +162,7 @@ const Profile = () => {
                 </div>
 
                 {/* PERSONAL INFORMATION + SECURITY */}
-                <div className="lg:col-span-8 bg-white dark:bg-[#0f172a] border border-blue-200 dark:border-gray-800 rounded-3xl p-6 shadow-lg">
+                <div className="lg:col-span-8 bg-white text-black dark:text-white dark:bg-[#0f172a] border border-blue-200 dark:border-gray-800 rounded-3xl p-6 shadow-lg">
 
                     {/* Personal Information */}
                     <h2 className="text-xl font-semibold text-black dark:text-white mb-6">

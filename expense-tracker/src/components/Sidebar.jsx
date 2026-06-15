@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logout } from "../redux/authSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import defaultAvatar from '../assets/avatar/default.jpg'
+import defaultAvatar from '../assets/avatar/userdefaultimg.png'
 import avatar1 from '../assets/avatar/AvatarMaker1.png'
-import avatar2 from '../assets/avatar/AvatarMaker2.png'
-import avatar3 from '../assets/avatar/AvatarMaker3.png'
-import avatar4 from '../assets/avatar/AvatarMaker4.png'
-import avatar5 from '../assets/avatar/AvatarMaker5.png'
-import avatar6 from '../assets/avatar/AvatarMaker6.png'
+import avatar2 from '../assets/avatar/AvatarMakerBg2.png'
+import avatar3 from '../assets/avatar/AvatarMakerBg3.png'
+import avatar4 from '../assets/avatar/AvatarMakerBg4.png'
+import avatar5 from '../assets/avatar/AvatarMakerBg5.png'
+import avatar6 from '../assets/avatar/AvatarMakerBg6.png'
 // import { useState } from "react";
 const Sidebar = () => {
     const user = useSelector((state) => state.auth.user);
@@ -129,7 +129,7 @@ const Sidebar = () => {
                 >
 
                     {/* Avatar */}
-                    <div className="w-11 h-11 rounded-full bg-cyan-500 flex items-center justify-center overflow-hidden shrink-0">
+                    <div className="w-11 h-11 rounded-full bg-white flex items-center justify-center overflow-hidden shrink-0">
                         <img
                             src={selectAvatar}
                             alt="Profile Avatar"
