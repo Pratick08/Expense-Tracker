@@ -7,7 +7,7 @@ import { updateProfile, updateAvatar, updatePassword, deleteAccount } from "../r
 import defaultAvatar from '../assets/avatar/userDefaultImg.png'
 import avatar1 from '../assets/avatar/AvatarMaker1.png'
 import avatar2 from '../assets/avatar/AvatarMakerBg2.png'
-import avatar3 from '../assets/avatar/AvatarMakerBg3.png'
+import avatar3 from "../assets/avatar/AvatarMakerbg3.png";
 import avatar4 from '../assets/avatar/AvatarMakerBg4.png'
 import avatar5 from '../assets/avatar/AvatarMakerBg5.png'
 import avatar6 from '../assets/avatar/AvatarMakerBg6.png'
