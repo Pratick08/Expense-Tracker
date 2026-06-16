@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from 'react-router-dom'
 import { updateProfile, updateAvatar, updatePassword, deleteAccount } from "../redux/authSlice";
-import defaultAvatar from '../assets/avatar/userdefaultimg.png'
+import defaultAvatar from '../assets/avatar/userDefaultImg.png'
 import avatar1 from '../assets/avatar/AvatarMaker1.png'
 import avatar2 from '../assets/avatar/AvatarMakerBg2.png'
 import avatar3 from '../assets/avatar/AvatarMakerBg3.png'
