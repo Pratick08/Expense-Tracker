@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from 'react-router-dom'
 import { updateProfile, updateAvatar, updatePassword, deleteAccount } from "../redux/authSlice";
@@ -12,10 +12,12 @@ import avatar4 from '../assets/avatar/AvatarMakerBg4.png'
 import avatar5 from '../assets/avatar/AvatarMakerBg5.png'
 import avatar6 from '../assets/avatar/AvatarMakerBg6.png'
 import toast from "react-hot-toast";
+import { fetchAllTransactions} from "../redux/expenceSlice";
 
 const Profile = () => {
     const user = useSelector((state) => state.auth.user)
-    console.log(user.avatar)
+    // console.log(user.avatar)
+    const transactions=useSelector((state)=> state.expence.transactions)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [usernameError, setUsernameError] = useState("");
@@ -28,8 +30,19 @@ const Profile = () => {
     const [confirmPass, setConfirmPass] = useState("")
     const [selectAvatar, setSelectAvatar] = useState(user.avatar)
     const avatars = [defaultAvatar, avatar1, avatar2, avatar3, avatar4, avatar5, avatar6]
-
+    useEffect(() => {
+        dispatch(fetchAllTransactions())
+    }, [dispatch])
+    
+    console.log("transactions",transactions)
     // CHANGE USER NAME AND EMAIL
+    const totalIncome=transactions.filter(
+        (item)=>item.type==="income"
+    ).reduce((acc,item)=> acc + Number(item.amount), 0)
+    const totalExpense=transactions.filter(
+        (item)=>item.type==="expense"
+    ).reduce((acc,item)=> acc + Number(item.amount), 0)
+
     function handleSaveChanges() {
         const userDetails = {
             username,
@@ -356,7 +369,7 @@ const Profile = () => {
                             </p>
 
                             <h3 className="text-2xl font-bold mt-2 text-black dark:text-white">
-                                245
+                                {transactions.length}
                             </h3>
                         </div>
 
@@ -376,7 +389,7 @@ const Profile = () => {
                             </p>
 
                             <h3 className="text-2xl font-bold mt-2 text-green-500">
-                                ₹2.4L
+                                ₹{totalIncome}
                             </h3>
                         </div>
 
@@ -386,7 +399,7 @@ const Profile = () => {
                             </p>
 
                             <h3 className="text-2xl font-bold mt-2 text-red-500">
-                                ₹1.5L
+                                ₹{totalExpense}
                             </h3>
                         </div>
 

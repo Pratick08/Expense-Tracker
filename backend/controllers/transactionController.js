@@ -62,6 +62,22 @@ export const getTransactions = async (req, res) => {
    }
 
 };
+export const getAllTransactions = async (req, res) => {
+   try {
+      const transactions = await Transaction.find({ user: req.user.id })
+      // console.log(transactions)
+      res.status(201).json({
+         success: true,
+         transactions
+      })
+   } catch (error) {
+      res.status(500).json({
+         success: false,
+         message: error.message
+      });
+
+   }
+}
 export const getMonthlyTransactions = async (req, res) => {
    try {
       const transactions = await Transaction.find({ user: req.user.id })
@@ -94,7 +110,8 @@ export const getMonthlyTransactions = async (req, res) => {
       }))
       res.status(201).json({
          success: true,
-         chartData
+         chartData,
+         // transactions
       })
    } catch (error) {
       res.status(500).json({

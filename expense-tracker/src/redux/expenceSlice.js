@@ -6,6 +6,7 @@ import { BACKEND_URL } from '../config/api';
 const initialState =
 {
     transactionDatas: [],
+    transactions: [],
     monthlyTrend: [],  // Jan  Income: 50k  Expense: 30k
     loading: false
 }
@@ -27,11 +28,28 @@ export const fetchTransactions =
         }
 
     )
+export const fetchAllTransactions =
+    createAsyncThunk(
+        "transactions/fetchAllTransactions",
+        async (_, { getState }) => {
+            const token = getState().auth.accessToken;
+            const response = await axios.get(
+                `${BACKEND_URL}/api/allTransactions`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            return response.data.transactions;
+        }
+
+    )
 
 export const fetchMonthlyTransactions =
     createAsyncThunk(
         "transactions/fetchMonthlyTransactions",
-        async (_,{ getState }) => {
+        async (_, { getState }) => {
             // console.log("backend url:",BACKEND_URL)
             const token = getState().auth.accessToken;
             const response = await axios.get(
@@ -42,7 +60,7 @@ export const fetchMonthlyTransactions =
                     }
                 }
             );
-            return response.data.chartData;
+            return response.data;
         }
 
     )
@@ -145,8 +163,13 @@ export const expenceSlice = createSlice({
             .addCase(
                 fetchMonthlyTransactions.fulfilled,
                 (state, action) => {
-                    // console.log("action-payload", action.payload);
-                    state.monthlyTrend = action.payload;
+                    state.monthlyTrend = action.payload.chartData;
+                }
+            ).addCase(
+                fetchAllTransactions.fulfilled,
+                (state, action) => {
+                    // console.log("action-payload-transactions", action.payload.transactions);
+                    state.transactions = action.payload;
                 }
             )
             .addCase(

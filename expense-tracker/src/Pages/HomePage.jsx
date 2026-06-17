@@ -10,8 +10,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ThemeChange from "../components/ThemeChange";
+// import ThemeChange from "../components/ThemeChange";
 import { NavLink } from "react-router-dom";
+import HomePageNav from "../components/HomePageNav";
 
 const HomePage = () => {
 
@@ -53,47 +54,10 @@ const HomePage = () => {
 
     return (
 
-       <div className="min-h-screen bg-gray-100 text-gray-900 dark:bg-[#020617] dark:text-white relative">
+        <div className="min-h-screen bg-gray-100 text-gray-900 dark:bg-[#020617] dark:text-white relative">
             {/* NAVBAR */}
-            <nav className="w-full h-20 sticky top-0 z-50 bg-white shadow-lg dark:bg-[#020617]/95 backdrop-blur-xl dark:border-b  dark:border-gray-800 px-4 sm:px-6 flex items-center justify-between transition-colors duration-300">
-
-                <div className="flex items-center gap-4">
-
-                    <div className="w-12 h-12 rounded-2xl bg-linear-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-black text-xl font-black shadow-lg shadow-cyan-500/30">
-                        E
-                    </div>
-
-                    <div>
-
-                        <h1 className="text-2xl font-black tracking-wide text-gray-900 dark:text-white">
-                            Expense Tracker
-                        </h1>
-
-                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                            Smart Finance Manager
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div className="flex items-center gap-4">
-
-                    <ThemeChange />
-
-                    <NavLink to="/login">
-                        <button className="px-5 py-2.5 rounded-2xl border border-gray-300 dark:border-white/10 bg-white dark:bg-white/5 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-white/10 transition-all duration-300">
-                            Login
-                        </button>
-                    </NavLink>
-
-                    <button className="px-6 py-2.5 rounded-2xl bg-linear-to-r from-cyan-400 to-blue-500 text-black font-bold hover:scale-105 transition-all duration-300 ">
-                        <NavLink to="/dashboard">Get Started</NavLink>
-                    </button>
-
-                </div>
-
-            </nav>
+            
+            <HomePageNav/>
 
             {/* HERO SECTION */}
             <section className="relative z-10 px-6 md:px-12 pt-20 pb-28">
@@ -195,10 +159,10 @@ const HomePage = () => {
 
                                 <div
                                     key={index}
-                                    className="group bg-white dark:bg-white/5 border border-white/10 rounded-[32px] p-8 backdrop-blur-xl hover:-translate-y-3 hover:border-cyan-500/40 transition-all duration-500 shadow-xl"
+                                    className="group bg-white dark:bg-white/5 border border-white/10 rounded-4xl p-8 backdrop-blur-xl hover:-translate-y-3 hover:border-cyan-500/40 transition-all duration-500 shadow-xl"
                                 >
 
-                                    <div className="w-[72px] h-[72px] rounded-3xl bg-linear-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-4xl mb-7 shadow-xl shadow-cyan-500/20 group-hover:scale-110 transition-all duration-300">
+                                    <div className="w-18 h-18 rounded-3xl bg-linear-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-4xl mb-7 shadow-xl shadow-cyan-500/20 group-hover:scale-110 transition-all duration-300">
                                         {item.icon}
                                     </div>
 
@@ -507,7 +471,7 @@ const HomePage = () => {
 
                     <div className="relative overflow-hidden rounded-[40px] border border-gray-200 dark:border-white/10 bg-linear-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 backdrop-blur-2xl p-10 md:p-16">
 
-                        <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-cyan-500/5 dark:bg-cyan-500/10 blur-3xl rounded-full"></div>
+                        <div className="absolute top-0 right-0 w-75 h-75 bg-cyan-500/5 dark:bg-cyan-500/10 blur-3xl rounded-full"></div>
 
                         <div className="relative z-10 text-center">
 
