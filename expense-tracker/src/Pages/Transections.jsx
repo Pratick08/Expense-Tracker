@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTransaction, fetchTransactions } from "../redux/expenceSlice";
+import { deleteTransaction, fetchAllTransactions, fetchTransactions } from "../redux/expenceSlice";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import LineChart from "../components/LineChart"
 import {
     faTrash,
     faUtensils,
@@ -16,6 +17,8 @@ import {
 
 const Transections = () => {
     const transactionDatas = useSelector((state) => state.expence.transactionDatas);
+    const transactions = useSelector((state) => state.expence.transactions);
+    console.log(transactions)
     const dispatch = useDispatch();
 
     const [search, setSearch] = useState("");
@@ -30,13 +33,14 @@ const Transections = () => {
     )
 
     useEffect(() => {
+        dispatch(fetchAllTransactions())
         dispatch(fetchTransactions(
             {
                 month,
                 year
             }
         ));
-    }, [dispatch,month,year]);
+    }, [dispatch, month, year]);
 
     const filteredTransactions = transactionDatas.filter((item) => {
         const matchesSearch =
@@ -91,6 +95,17 @@ const Transections = () => {
                     </NavLink>
 
                 </div>
+
+            </div>
+
+            <div className="bg-white dark:bg-[#0f172a] border border-gray-200 dark:border-gray-800 rounded-3xl mb-8 p-6 shadow-lg h-full">
+                <div class="mb-6">
+                    <h2 class="text-xl font-bold text-black dark:text-white">Transactions Trend
+                    </h2>
+                    <p class="text-gray-600 dark:text-slate-400 mt-2">Monthly Income vs Expense
+                    </p>
+                </div>
+                <LineChart transactions={transactions} />
 
             </div>
 
@@ -378,7 +393,7 @@ const Transections = () => {
 
                                 {/* DATE */}
                                 <div className="flex items-center justify-center text-gray-600 dark:text-gray-400 text-sm whitespace-nowrap">
-                                     📅 {new Date(t.date).toLocaleDateString("en-GB")}
+                                    📅 {new Date(t.date).toLocaleDateString("en-GB")}
                                 </div>
 
                                 {/* AMOUNT */}

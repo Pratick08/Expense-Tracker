@@ -11,28 +11,39 @@ import {
 
 const LineChart = ({ transactions = [] }) => {
 
-    // STEP 1: Group by date (daily data for selected month)
+    const monthNames = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+
     const groupedData = {};
 
     transactions.forEach((t) => {
-        const day = new Date(t.date).getDate();
+        const monthIndex = new Date(t.date).getMonth();
+        const monthName = monthNames[monthIndex];
 
-        if (!groupedData[day]) {
-            groupedData[day] = { day, income: 0, expense: 0 };
+        if (!groupedData[monthName]) {
+            groupedData[monthName] = {
+                month: monthName,
+                income: 0,
+                expense: 0,
+                monthIndex
+            };
         }
 
         if (t.type === "income") {
-            groupedData[day].income += Number(t.amount);
+            groupedData[monthName].income += Number(t.amount);
         } else {
-            groupedData[day].expense += Number(t.amount);
+            groupedData[monthName].expense += Number(t.amount);
         }
     });
 
-    const chartData = Object.values(groupedData).sort((a, b) => a.day - b.day);
-
+    const chartData = Object.values(groupedData).sort(
+        (a, b) => a.monthIndex - b.monthIndex
+    );
     return (
         <div className="w-full h-95 bg-white dark:bg-[#0b1220] border border-gray-200 dark:border-gray-800 rounded-2xl p-4">
-
+           
             {/* Chart */}
             <ResponsiveContainer width="100%" height="85%">
                 <RechartsLineChart data={chartData}>
@@ -40,7 +51,7 @@ const LineChart = ({ transactions = [] }) => {
                     <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
 
                     <XAxis
-                        dataKey="day"
+                        dataKey="month"
                         stroke="#94a3b8"
                     />
 

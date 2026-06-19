@@ -5,7 +5,6 @@ import { addTransaction, updateTransaction, fetchTransactions, fetchMonthlyTrans
 import { useSearchParams } from "react-router";
 import toast from 'react-hot-toast';
 import SummaryCards from "../components/SummaryCards";
-// import LineChart from "../components/LineChart.jsx";
 import PieChartBox from "../components/PieChartBox.jsx";
 import RecentTransactions from "../components/RecentTransactions.jsx";
 import BarChartBox from "../components/BarChartBox.jsx";
@@ -331,7 +330,7 @@ const Dashboard = () => {
 
                 </div>
 
-                {/* Line Chart Section */}
+                
                 <div className="xl:col-span-2">
 
                     <div className="bg-white dark:bg-[#0f172a] border border-gray-200 dark:border-gray-800 rounded-3xl p-6 shadow-lg h-full">
@@ -346,7 +345,6 @@ const Dashboard = () => {
                             </p>
                         </div>
                         <BarChartBox monthlyTrend={monthlyTrend} />
-                        {/* <LineChart transactions={transactionDatas} /> */}
 
                     </div>
 

@@ -3,7 +3,7 @@ import { faLock, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from 'react-router-dom'
-import { updateProfile, updateAvatar, updatePassword, deleteAccount } from "../redux/authSlice";
+import { updateProfile, updateAvatar, updatePassword, deleteAccount, logout } from "../redux/authSlice";
 import defaultAvatar from '../assets/avatar/defaultuserBgTransparent.png'
 import avatar1 from '../assets/avatar/AvatarMaker1.png'
 import avatar2 from '../assets/avatar/AvatarMakerBg2.png'
@@ -30,11 +30,17 @@ const Profile = () => {
     const [confirmPass, setConfirmPass] = useState("")
     const [selectAvatar, setSelectAvatar] = useState(user.avatar)
     const avatars = [defaultAvatar, avatar1, avatar2, avatar3, avatar4, avatar5, avatar6]
+
     useEffect(() => {
         dispatch(fetchAllTransactions())
     }, [dispatch])
+
+    function handleLogout(){
+        dispatch(logout());
+        navigate('/login')
+    }
     
-    console.log("transactions",transactions)
+    // console.log("transactions",transactions)
     // CHANGE USER NAME AND EMAIL
     const totalIncome=transactions.filter(
         (item)=>item.type==="income"
@@ -416,8 +422,9 @@ const Profile = () => {
 
                     <div className="space-y-4">
 
-                        <button className="w-full p-4 rounded-2xl border border-red-500/20 bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-all">
-                            Logout From All Devices
+                        <button className="w-full p-4 rounded-2xl border border-red-500/20 bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-all"
+                        onClick={handleLogout}>
+                            Logout 
                         </button>
 
                         <button className="w-full p-4 rounded-2xl border border-red-500/20 bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-all flex items-center justify-center gap-2"
