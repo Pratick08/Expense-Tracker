@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logout } from "../redux/authSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import defaultAvatar from '../assets/avatar/userDefaultImg.png'
+import defaultAvatar from '../assets/avatar/defaultuserBgTransparent.png'
 import avatar1 from '../assets/avatar/AvatarMaker1.png'
 import avatar2 from '../assets/avatar/AvatarMakerBg2.png'
 import avatar3 from "../assets/avatar/AvatarMakerbg3.png";
