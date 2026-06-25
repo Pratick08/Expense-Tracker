@@ -1,33 +1,56 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useSelector } from "react-redux"
 import toast from "react-hot-toast";
-import { useState ,useEffect} from "react"
+import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux";
-import { createBudget, deleteBudget } from "../redux/budgetSlice";
+import { createBudget, deleteBudget, updateBudget } from "../redux/budgetSlice";
 import { fetchBudgets } from '../redux/budgetSlice'
+import { NavLink, useSearchParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fetchTransactions } from '../redux/expenceSlice'
-const Budgets = () => {
-    const dispatch = useDispatch()
-    const transactionDatas = useSelector((state) => state.expence.transactionDatas);
-    const budgetDatas = useSelector((state) => state.budgets.budgetDatas);
-    useEffect(() => {
-        dispatch(fetchBudgets())
-            dispatch(
-        fetchTransactions({
-            month: new Date().getMonth() + 1,
-            year: new Date().getFullYear()
-        })
-    );
+import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-    }, [dispatch])
+const Budgets = () => {
 
     const [budgetCategory, setBudgetCategory] = useState('Food');
     const [budgetAmount, setBudgetAmount] = useState('');
+    const dispatch = useDispatch()
+    const transactionDatas = useSelector((state) => state.expence.transactionDatas);
+    const budgetDatas = useSelector((state) => state.budgets.budgetDatas);
+    const [searchParams, setSearchParams] = useSearchParams()
+    const budgetId = searchParams.get("edit");
+    console.log(budgetId)
+    useEffect(() => {
+        dispatch(fetchBudgets())
+        dispatch(
+            fetchTransactions({
+                month: new Date().getMonth() + 1,
+                year: new Date().getFullYear()
+            })
+        );
+
+    }, [dispatch])
+    useEffect(() => {
+        if (budgetId) {
+            const budget = budgetDatas.find(
+                (item) => String(item._id) === String(budgetId)
+            )
+            setBudgetCategory(budget.category)
+            setBudgetAmount(budget.amount)
+        } else {
+            setBudgetCategory("Food");
+            setBudgetAmount('')
+        }
+
+
+    }, [budgetId, budgetDatas])
+
 
     const totalBudget = budgetDatas.reduce((acc, item) => acc + item.amount, 0);
     const totalSpent = transactionDatas.filter(
         (item) => item.type === "expense"
     )
-    .reduce((acc, item) => acc + item.amount, 0);
+        .reduce((acc, item) => acc + item.amount, 0);
     // console.log("Expense", totalExpense)
     function handleBudget() {
 
@@ -35,24 +58,35 @@ const Budgets = () => {
             toast.error("Please fill all the fields")
             return;
         }
+        if (!budgetId) {
+            const alreadyExists = budgetDatas.find(
+                (item) => item.category === budgetCategory && item.category === budgetCategory
+            )
 
-        const alreadyExists = budgetDatas.find(
-            (item) => item.category === budgetCategory
-        )
-
-        if (alreadyExists) {
-            toast.error("Budget already exists")
-            return;
+            if (alreadyExists) {
+                toast.error("Budget already exists")
+                return;
+            }
         }
-
         const budgetData = {
             category: budgetCategory,
             amount: Number(budgetAmount)
         }
+        if (budgetId) {
+            const updateBudgetData = {
+                id: budgetId,
+                category: budgetCategory,
+                amount: Number(budgetAmount)
+            }
+            dispatch(updateBudget(updateBudgetData))
+        } else {
 
-        dispatch(createBudget(budgetData));
+            dispatch(createBudget(budgetData));
+        }
+
         setBudgetAmount('');
         setBudgetCategory('Food');
+        setSearchParams({})
     }
 
     function handleDeleteCard(cardId) {
@@ -330,10 +364,17 @@ const Budgets = () => {
                                                 </p>
                                             )
                                         }
+                                        {/* {`/?edit=${t._id}`}  */}
 
-                                        <button className="text-red-400 hover:text-red-500 transition-all duration-300" onClick={() => handleDeleteCard(item._id)}>
-                                            Delete
-                                        </button>
+                                        <div>
+
+                                            <NavLink to={`/budget?edit=${item._id}`} className="text-cyan-500 dark:text-cyan-400">
+                                                <FontAwesomeIcon icon={faPenToSquare} />
+                                            </NavLink>
+                                            <button className="text-red-400 ml-2 hover:text-red-500 transition-all duration-300" onClick={() => handleDeleteCard(item._id)}>
+                                                <FontAwesomeIcon icon={faTrash} />
+                                            </button>
+                                        </div>
 
                                     </div>
 

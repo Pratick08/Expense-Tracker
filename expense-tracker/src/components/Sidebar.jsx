@@ -129,7 +129,7 @@ const Sidebar = () => {
                 >
 
                     {/* Avatar */}
-                    <div className="w-11 h-11 rounded-full bg-white flex items-center justify-center overflow-hidden shrink-0">
+                    <div className="w-11 h-11 rounded-full bg-transparent  border-2 border-cyan-500 flex items-center justify-center overflow-hidden shrink-0">
                         <img
                             src={selectAvatar}
                             alt="Profile Avatar"

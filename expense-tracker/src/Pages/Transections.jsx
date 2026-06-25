@@ -133,21 +133,7 @@ const Transections = () => {
                             setMonth(new Date().getMonth() + 1);
                             setYear(new Date().getFullYear());
                         }}
-                        className="
-                flex items-center gap-2
-                px-5 py-3
-                rounded-2xl
-                border border-gray-300 dark:border-slate-700
-                bg-gray-50 dark:bg-[#111827]
-                hover:bg-cyan-50
-                dark:hover:bg-cyan-500/10
-                hover:border-cyan-500
-                text-gray-700 dark:text-slate-300
-                hover:text-cyan-500
-                transition-all duration-300
-                font-medium
-            "
-                    >
+                        className="flex items-center gap-2 px-5 py-3 rounded-2xl border border-gray-300 dark:border-slate-700 bg-gray-50 dark:bg-[#111827]hover:bg-cyan-50 dark:hover:bg-cyan-500/10 hover:border-cyan-500 text-gray-700 dark:text-slate-300 hover:text-cyan-500 transition-all duration-300 font-medium">
                         ↺ Reset Filters
                     </button>
 

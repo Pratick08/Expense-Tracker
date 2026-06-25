@@ -30,11 +30,10 @@ const Dashboard = () => {
     )
     const transactionDatas = useSelector((state) => state.expence.transactionDatas);
     const transactionId = searchParams.get("edit");
-    // .log(year)
+  
     const dispatch = useDispatch();
 
 
-    // .log(transactionId)
     useEffect(() => {
         dispatch(fetchTransactions(
             {
@@ -49,9 +48,6 @@ const Dashboard = () => {
     }, [dispatch, transactionDatas]);
 
     useEffect(() => {
-        // .log(transactionId)
-        // .log(transactionDatas)
-        // dispatch(fetchTransactions())
         if (transactionId) {
             const transaction = transactionDatas.find(
                 (item) => String(item._id) === String(transactionId)

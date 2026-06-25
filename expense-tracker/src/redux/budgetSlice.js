@@ -41,6 +41,23 @@ export const createBudget = createAsyncThunk(
         return res.data.budget;
     }
 )
+export const updateBudget = createAsyncThunk(
+    "budgets/updateBudget",
+    async (updatebudgetdata, { getState }) => {
+        const token = getState().auth.accessToken
+        const res = await axios.put(
+            `${BACKEND_URL}/api/budgets/${updatebudgetdata.id}`,
+            updatebudgetdata,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+        toast.success("Budget Updated Successfully")
+        return res.data.budget;
+    }
+)
 export const deleteBudget = createAsyncThunk(
     "budgets/deleteBudget",
     async (id, { getState }) => {
@@ -82,6 +99,17 @@ export const budgetSlice = createSlice({
                     state.budgetDatas = state.budgetDatas.filter(
                         (item) => item._id !== action.payload
                     )
+                }
+            ).addCase(
+                updateBudget.fulfilled,
+                (state, action) => {
+                    // console.log(action.payload)
+                    const index = state.budgetDatas.findIndex(
+                        (item) => String(item._id) === String(action.payload._id)
+                    )
+                    if (index >= 0) {
+                        state.budgetDatas[index] = action.payload;
+                    }
                 }
             )
     }
